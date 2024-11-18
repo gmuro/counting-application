@@ -3,27 +3,26 @@ package com.numerical.view;
 import javax.swing.*;
 import java.awt.*;
 import com.numerical.logic.Counter;
-import com.numerical.logic.CounterListener;
 import com.numerical.logic.PeriodicIncrementers;
 
 public class MainWindow extends JFrame {
     private Counter counter;
     private PeriodicIncrementers incrementers;
     // increments array values
-    private long INCREMENTS[] = {1, 10, 100, 1000, 10000, 100000, 1000000};
+    private long INCREMENTS[] = {1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000};
     private int TOTAL_INCREMENTERS = INCREMENTS.length;
     
     private PanelIncrementer panelsConfIncrementer[] = new PanelIncrementer[TOTAL_INCREMENTERS];
-    private PanelCount panelCount = new PanelCount("0");
+    private PanelCount panelCount;
 
     public MainWindow() {
         counter = new Counter();
-        counter.setCounterListener(counterListener);
         incrementers = new PeriodicIncrementers(counter, TOTAL_INCREMENTERS);
 
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         
+        panelCount = new PanelCount(counter);
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.weightx = 1.0;
@@ -58,24 +57,6 @@ public class MainWindow extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
     }
-    
-    private boolean refreshPending = false;
-
-    private CounterListener counterListener = new CounterListener() {
-        
-        @Override
-        public void onIncrement(Counter counter) {
-
-            if (refreshPending == false) {
-                refreshPending = true;
-                SwingUtilities.invokeLater(() -> {
-                    panelCount.setCount(counter.getCount());
-                    refreshPending = false;
-                });
-            }
-        }
-    };
-    
     
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new MainWindow());

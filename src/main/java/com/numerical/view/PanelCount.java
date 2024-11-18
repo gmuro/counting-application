@@ -2,17 +2,24 @@
 package com.numerical.view;
 
 import javax.swing.*;
+
+import com.numerical.logic.Counter;
+import com.numerical.logic.CounterListener;
+
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
 
 public class PanelCount extends JPanel {
-    private JLabel label;
+    private JLabel label = new JLabel("");
+    private Counter counter;
+    private int prevLength = 0;
 
-    public PanelCount(String texto) {
+    public PanelCount(Counter counter) {
         setLayout(new BorderLayout());
-        label = new JLabel(texto);
+        this.counter = counter;
+        counter.setCounterListener(counterListener);
         label.setHorizontalAlignment(JLabel.CENTER);
         label.setVerticalAlignment(JLabel.CENTER);
         add(label, BorderLayout.CENTER);
@@ -22,12 +29,28 @@ public class PanelCount extends JPanel {
                 updateFontSize();
             }
         });
-        updateFontSize();
+        setCount(counter.getCount());
     }
 
-    private int prevLength = 0;
+    private boolean refreshPending = false;
 
-    public void setCount(long count) {
+    private CounterListener counterListener = new CounterListener() {
+        
+        @Override
+        public void onIncrement(Counter counter) {
+
+            if (refreshPending == false) {
+                refreshPending = true;
+                SwingUtilities.invokeLater(() -> {
+                    setCount(counter.getCount());
+                    refreshPending = false;
+                });
+            }
+        }
+    };
+    
+
+    private void setCount(long count) {
         String text = String.format("%,d", count);
         if (text.length() > prevLength) {
             prevLength = text.length();

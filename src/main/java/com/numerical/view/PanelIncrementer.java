@@ -11,7 +11,7 @@ import java.awt.GridLayout;
 public class PanelIncrementer extends JPanel {
     private JSlider slider;
     private JLabel labelPeriod;
-    static final int TOTAL_POSITIONS = 5;
+    static final int TOTAL_POSITIONS = 4;
     private PeriodicIncrementer incrementer;
 
     public PanelIncrementer(long increment, PeriodicIncrementer incrementer) {
@@ -53,10 +53,6 @@ public class PanelIncrementer extends JPanel {
                 case 3:
                     labelPeriod.setText("x100");
                     incrementer.setPeriod(10);
-                    break;
-                case 4:
-                    labelPeriod.setText("x1000");
-                    incrementer.setPeriod(1);
                     break;
             }
         });
