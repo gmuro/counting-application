@@ -11,35 +11,40 @@ public class PanelCount extends JPanel {
     private JLabel label;
 
     public PanelCount(String texto) {
-        label = new JLabel(texto);
-        label.setHorizontalAlignment(JLabel.CENTER); // Ajusta el texto al centro
-        add(label); // Agrega el label al panel
-
-        // Configura el layout para que el label ocupe todo el ancho
         setLayout(new BorderLayout());
+        label = new JLabel(texto);
+        label.setHorizontalAlignment(JLabel.CENTER);
+        label.setVerticalAlignment(JLabel.CENTER);
         add(label, BorderLayout.CENTER);
-
-        // Establece la fuente del label para que se agrande para ocupar todo el alto
-        label.setFont(new Font("Arial", Font.BOLD, 24)); // Establece la fuente y el tamaño
-        label.setVerticalAlignment(JLabel.CENTER); // Ajusta el texto al centro vertical
-        label.setVerticalTextPosition(JLabel.CENTER); // Ajusta el texto al centro vertical
-
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                // Actualiza la fuente del label según el alto del panel
-
-                int fontSize = (int) (Math.min(getWidth(), getHeight()) * 0.2);
-                label.setFont(new Font("Arial", Font.BOLD, fontSize));
+                updateFontSize();
             }
         });
+        updateFontSize();
     }
 
     public void setCount(long count) {
-        label.setText(String.valueOf(count));
-        
-        int fontSize = (int) (Math.min(getWidth(), getHeight()) * 0.2);
-        label.setFont(new Font("Arial", Font.BOLD, fontSize));
+        label.setText(String.format("%,d", count));
+        updateFontSize();
     }
 
+    private void updateFontSize() {
+        String fontName = "Arial";
+        Font font = new Font(fontName, Font.BOLD, 12);
+        int fontSize = 12;
+        while (true) {
+            font = new Font(fontName, Font.BOLD, fontSize);
+            label.setFont(font);
+            Dimension textSize = label.getPreferredSize();
+            if (textSize.width < getWidth()*0.9 && textSize.height < getHeight()*0.9) {
+                fontSize++;
+            } else {
+                break;
+            }
+        }
+        font = new Font(fontName, Font.BOLD, fontSize + 1);
+        label.setFont(font);
+    }
 }
