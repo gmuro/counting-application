@@ -28,13 +28,18 @@ public class PanelCount extends JPanel {
             @Override
             public void componentResized(ComponentEvent e) {
                 // Actualiza la fuente del label según el alto del panel
-                label.setFont(new Font("Arial", Font.BOLD, (int) (getHeight() * 0.8)));
+
+                int fontSize = (int) (Math.min(getWidth(), getHeight()) * 0.2);
+                label.setFont(new Font("Arial", Font.BOLD, fontSize));
             }
         });
     }
 
     public void setCount(long count) {
         label.setText(String.valueOf(count));
+        
+        int fontSize = (int) (Math.min(getWidth(), getHeight()) * 0.2);
+        label.setFont(new Font("Arial", Font.BOLD, fontSize));
     }
 
 }

@@ -20,7 +20,10 @@ public class PanelIncrementer extends JPanel {
         this.incrementer.setIncrement(increment);
 
         slider = new JSlider(0, TOTAL_POSITIONS-1, 0);
-        //labelIncrement = new JLabel("+" + increment);
+        slider.setSnapToTicks(true);
+        slider.setMajorTickSpacing(1);
+        slider.setPaintTicks(true);
+        
         labelPeriod = new JLabel("Diabled");
 
         // set border panel
