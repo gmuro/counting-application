@@ -1,0 +1,45 @@
+# Files and directories to ignore
+
+# Maven's target directory
+/target/
+
+# Maven's configuration files
+/.mvn/
+.mvn/wrapper/maven-wrapper.properties
+
+# Eclipse configuration files
+/.project
+/.settings/
+
+# IntelliJ IDEA configuration files
+/.idea/
+
+# NetBeans configuration files
+/nbproject/
+
+# Configuration files for other IDEs
+/.classpath
+
+# Log files
+*.log
+
+# Compiled files
+*.class
+*.jar
+*.war
+*.ear
+
+# Dependency files
+*.pom
+
+# Maven configuration files
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+
+# Other files that are not necessary in the repository
+*.iml
+*.ipr
+*.iws
+*.vscode/
+
