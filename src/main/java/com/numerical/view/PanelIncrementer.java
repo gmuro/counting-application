@@ -39,7 +39,7 @@ public class PanelIncrementer extends JPanel {
             switch (position) {
                 case 0:
                     labelPeriod.setText("Disabled");
-                    incrementer.stop();
+                    incrementer.setPeriod(0);
                     break;
                 case 1:
                     labelPeriod.setText("x1");
@@ -59,8 +59,6 @@ public class PanelIncrementer extends JPanel {
                     incrementer.setPeriod(1);
                     break;
             }
-            if (position != 0)
-                incrementer.start();
         });
 
         this.setLayout(new GridLayout(2, 1));

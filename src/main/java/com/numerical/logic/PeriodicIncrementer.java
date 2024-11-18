@@ -31,7 +31,7 @@ public class PeriodicIncrementer {
      */
     public void start() {
         stop();
-        if (period != 0 && increment != 0) {
+        if (period > 0 && increment != 0) {
             future = scheduler.scheduleAtFixedRate(() -> counter.increment(increment), 0, period, TimeUnit.MILLISECONDS);
         }
     }
@@ -60,7 +60,10 @@ public class PeriodicIncrementer {
     }
 
     public void setPeriod(long period) {
-        this.period = period;
+        if (this.period != period) {
+            this.period = period;
+            start();
+        }
     }
 
 }
