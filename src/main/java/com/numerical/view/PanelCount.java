@@ -25,20 +25,29 @@ public class PanelCount extends JPanel {
         updateFontSize();
     }
 
+    private int prevLength = 0;
+
     public void setCount(long count) {
+        String text = String.format("%,d", count);
+        if (text.length() > prevLength) {
+            prevLength = text.length();
+            updateFontSize();
+        }
+
         label.setText(String.format("%,d", count));
-        updateFontSize();
     }
 
     private void updateFontSize() {
         String fontName = "Arial";
         Font font = new Font(fontName, Font.BOLD, 12);
         int fontSize = 12;
+        int width = getWidth() * 8 / 10;
+        int height = getHeight() * 8 / 10;
         while (true) {
             font = new Font(fontName, Font.BOLD, fontSize);
             label.setFont(font);
             Dimension textSize = label.getPreferredSize();
-            if (textSize.width < getWidth()*0.9 && textSize.height < getHeight()*0.9) {
+            if (textSize.width < width && textSize.height < height) {
                 fontSize++;
             } else {
                 break;
