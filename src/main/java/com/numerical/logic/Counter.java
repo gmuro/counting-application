@@ -1,7 +1,10 @@
 package com.numerical.logic;
 
 public class Counter {
-    private int count;
+    private long count;
+    
+    // listener for the counter increment event
+    private CounterListener counterListener;
 
     public Counter() {
         this.count = 0;
@@ -11,12 +14,20 @@ public class Counter {
         count++;
     }
 
-    public void increment(int value) {
+    public void increment(long value) {
         count += value;
+        if (counterListener != null) {
+            counterListener.onIncrement(this);
+        }
     }
 
-    public int getCount() {
+    public long getCount() {
         return count;
     }
+
+    public void setCounterListener(CounterListener counterListener) {
+        this.counterListener = counterListener;
+    }
+
 }
 
