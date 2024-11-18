@@ -43,6 +43,12 @@ public class PanelCount extends JPanel {
                 refreshPending = true;
                 SwingUtilities.invokeLater(() -> {
                     setCount(counter.getCount());
+                    // limit refresh rate
+                    try {
+                        Thread.sleep(15);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     refreshPending = false;
                 });
             }
