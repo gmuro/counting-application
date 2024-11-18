@@ -27,7 +27,8 @@ public class PanelIncrementer extends JPanel {
         labelPeriod = new JLabel("Diabled");
 
         // set border panel
-        this.setBorder(javax.swing.BorderFactory.createTitledBorder("+" + increment));
+        String title = String.format("+%,d", increment);
+        this.setBorder(javax.swing.BorderFactory.createTitledBorder(title));
 
         // set vertical slider
         slider.setOrientation(JSlider.VERTICAL);

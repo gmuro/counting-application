@@ -9,7 +9,10 @@ public class MainWindow extends JFrame {
     private Counter counter;
     private PeriodicIncrementers incrementers;
     // increments array values
-    private long INCREMENTS[] = {1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000};
+    private long INCREMENTS[] = {
+        1,          10,         100,            1000, 
+        10000,      100000,     1000000,        10000000, 
+        100000000,  1000000000, 10000000000l};
     private int TOTAL_INCREMENTERS = INCREMENTS.length;
     
     private PanelIncrementer panelsConfIncrementer[] = new PanelIncrementer[TOTAL_INCREMENTERS];
