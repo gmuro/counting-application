@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.numerical.logic.Counter;
@@ -77,14 +78,22 @@ public class PanelConf extends JPanel{
         });
 
         zerButton.addActionListener(e -> {
-            for (int i = 0; i < panelsConfIncrementer.length; i++) {
+
+            int ret = JOptionPane.showConfirmDialog(this, "Are you sure?", "Count to zero", JOptionPane.YES_NO_OPTION);
+
+            if (ret == JOptionPane.YES_OPTION) {
                 counter.setCount(0);
-            }
+            } 
         });
 
         accelToZeroButton.addActionListener(e -> {
-            for (int i = 0; i < panelsConfIncrementer.length; i++) {
-                panelsConfIncrementer[i].accelToZero();
+
+            int ret = JOptionPane.showConfirmDialog(this, "Are you sure?", "Accelerate to zero", JOptionPane.YES_NO_OPTION);
+
+            if (ret == JOptionPane.YES_OPTION) {
+                for (int i = 0; i < panelsConfIncrementer.length; i++) {
+                    panelsConfIncrementer[i].accelToZero();
+                }
             }
         });
     }
