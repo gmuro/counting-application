@@ -1,4 +1,8 @@
-
+// Copyright (c) 2024 Gustavo Muro
+// Licensed under the Creative Commons Attribution-NonCommercial-NoDerivatives
+// 4.0 International License.
+// To view a copy of this license, visit 
+// http://creativecommons.org/licenses/by-nc-nd/4.0/
 package com.numerical.view;
 
 import javax.swing.*;
@@ -9,7 +13,6 @@ import com.numerical.logic.CounterListener;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-
 
 public class PanelCount extends JPanel {
     private JLabel label = new JLabel("");
