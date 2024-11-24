@@ -1,4 +1,5 @@
 # Counter Program
+![Captura desde 2024-11-24 19-48-09](https://github.com/user-attachments/assets/cd6f8a70-0bbc-466a-9ea9-f73168002112)
 
 ## Overview
 
