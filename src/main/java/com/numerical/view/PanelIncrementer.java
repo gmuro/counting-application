@@ -65,4 +65,20 @@ public class PanelIncrementer extends JPanel {
 
         this.setVisible(true);
     }
+
+    @Override
+    public void setEnabled(boolean enabled) {
+        super.setEnabled(enabled);
+        slider.setEnabled(enabled);
+        labelPeriod.setEnabled(enabled);
+    }
+
+    // increments slider if is possible
+    public boolean incrementSpeed() {
+        if (slider.getValue() < TOTAL_POSITIONS-1) {
+            slider.setValue(slider.getValue() + 1);
+            return true;
+        }
+        return false;
+    }
 }

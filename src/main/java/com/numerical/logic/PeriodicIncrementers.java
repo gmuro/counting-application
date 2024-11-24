@@ -6,7 +6,7 @@ import java.util.concurrent.ScheduledExecutorService;
 public class PeriodicIncrementers {
 
     // Total incrementers
-    final int TOTAL_INCREMENTERS;
+    public final int TOTAL_INCREMENTERS;
     // array of periodic incrementers
     static PeriodicIncrementer[] incrementers;
 
