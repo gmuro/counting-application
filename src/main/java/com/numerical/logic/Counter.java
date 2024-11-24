@@ -17,7 +17,7 @@ public class Counter {
     public void increment(long value) {
         count += value;
         if (counterListener != null) {
-            counterListener.onIncrement(this);
+            counterListener.onChange(this);
         }
     }
 
@@ -27,6 +27,13 @@ public class Counter {
 
     public void setCounterListener(CounterListener counterListener) {
         this.counterListener = counterListener;
+    }
+
+    public void setCount(int i) {
+        this.count = i;
+        if (counterListener != null) {
+            counterListener.onChange(this);
+        }
     }
 
 }

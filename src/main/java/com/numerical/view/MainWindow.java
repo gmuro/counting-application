@@ -25,7 +25,7 @@ public class MainWindow extends JFrame {
         GridBagConstraints gbc = new GridBagConstraints();
         
         panelCount = new PanelCount(counter);
-        panelConf = new PanelConf(incrementers, INCREMENTS);
+        panelConf = new PanelConf(incrementers, INCREMENTS, counter);
         
         gbc.gridx = 0;
         gbc.gridy = 0;

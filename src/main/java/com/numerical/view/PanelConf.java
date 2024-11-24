@@ -4,9 +4,11 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
+import com.numerical.logic.Counter;
 import com.numerical.logic.PeriodicIncrementers;
 
 public class PanelConf extends JPanel{
@@ -14,8 +16,11 @@ public class PanelConf extends JPanel{
     private PanelIncrementer panelsConfIncrementer[];
     private final long INCREMENTS[];
     private JCheckBox autoAccelCheckBox;
+    private JButton zerButton;
+    private JButton accelToZeroButton;
     private Thread autoAccelThread;
     private boolean autoAccel = false;
+    private Counter counter;
 
     // auto accel thread
     private Runnable autoAccelRunnable = () -> {
@@ -70,11 +75,24 @@ public class PanelConf extends JPanel{
                 autoAccelThread.interrupt();
             }
         });
+
+        zerButton.addActionListener(e -> {
+            for (int i = 0; i < panelsConfIncrementer.length; i++) {
+                counter.setCount(0);
+            }
+        });
+
+        accelToZeroButton.addActionListener(e -> {
+            for (int i = 0; i < panelsConfIncrementer.length; i++) {
+                panelsConfIncrementer[i].accelToZero();
+            }
+        });
     }
 
 
     // constructor
-    public PanelConf(PeriodicIncrementers incrementers, long INCREMENTS[]) {
+    public PanelConf(PeriodicIncrementers incrementers, long INCREMENTS[], Counter counter) {
+        this.counter = counter;
         this.INCREMENTS = INCREMENTS;
         this.incrementers = incrementers;
         this.panelsConfIncrementer = new PanelIncrementer[INCREMENTS.length];
@@ -88,25 +106,49 @@ public class PanelConf extends JPanel{
         this.setMinimumSize(new Dimension(800, 200));
         this.setMaximumSize(new Dimension(Integer.MAX_VALUE, 200));
         this.setLayout(new GridBagLayout());
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = INCREMENTS.length;
-        gbc.weightx = 0;
-        gbc.weighty = 0;
-
+        
+        /* auto accel checkbox  */
         autoAccelCheckBox = new JCheckBox("Auto Acceleration");
         autoAccelCheckBox.setSelected(false);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1;
+        gbc.weighty = 0;
         this.add(autoAccelCheckBox, gbc);
 
+        /* set zero buttom */
+        zerButton = new JButton("Zero");
+        gbc.gridx++;
+        this.add(zerButton, gbc);
+
+        /* accel to zero button */
+        accelToZeroButton = new JButton("Accel To Zero");
+        gbc.gridx++;
+        this.add(accelToZeroButton, gbc);
+        
+        /* panel for increments */
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridBagLayout());
         gbc.gridy++;
+        gbc.gridwidth = gbc.gridx+1;
+        gbc.gridx = 0;
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
-        gbc.gridwidth = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        this.add(panel, gbc);
+
+
+        /* panelsConfIncrementer */
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
 
         gbc.fill = GridBagConstraints.BOTH;
         for (int i = 0; i < INCREMENTS.length ; i++) {
             panelsConfIncrementer[i] = new PanelIncrementer(INCREMENTS[i], incrementers.getIncrementer(i));
-            this.add(panelsConfIncrementer[i], gbc);
+            panel.add(panelsConfIncrementer[i], gbc);
             gbc.gridx++;
         }
 

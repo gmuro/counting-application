@@ -81,4 +81,8 @@ public class PanelIncrementer extends JPanel {
         }
         return false;
     }
+
+    public void accelToZero() {
+        slider.setValue(0);
+    }
 }

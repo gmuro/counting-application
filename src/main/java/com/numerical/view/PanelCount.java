@@ -37,7 +37,7 @@ public class PanelCount extends JPanel {
     private CounterListener counterListener = new CounterListener() {
         
         @Override
-        public void onIncrement(Counter counter) {
+        public void onChange(Counter counter) {
 
             if (refreshPending == false) {
                 refreshPending = true;
