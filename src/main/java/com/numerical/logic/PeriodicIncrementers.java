@@ -13,7 +13,7 @@ public class PeriodicIncrementers {
     // Total incrementers
     public final int TOTAL_INCREMENTERS;
     // array of periodic incrementers
-    static PeriodicIncrementer[] incrementers;
+    private final PeriodicIncrementer[] incrementers;
 
     ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 

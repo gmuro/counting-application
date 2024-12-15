@@ -5,19 +5,19 @@
 // http://creativecommons.org/licenses/by-nc-nd/4.0/
 package com.numerical.view;
 
+import java.awt.GridLayout;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 
 import com.numerical.logic.PeriodicIncrementer;
 
-import java.awt.GridLayout;
-
 public class PanelIncrementer extends JPanel {
     private JSlider slider;
     private JLabel labelPeriod;
     static final int TOTAL_POSITIONS = 4;
-    private PeriodicIncrementer incrementer;
+    private final PeriodicIncrementer incrementer;
 
     public PanelIncrementer(long increment, PeriodicIncrementer incrementer) {
         this.incrementer = incrementer;
@@ -29,7 +29,7 @@ public class PanelIncrementer extends JPanel {
         slider.setMajorTickSpacing(1);
         slider.setPaintTicks(true);
         
-        labelPeriod = new JLabel("Diabled");
+        labelPeriod = new JLabel("Disabled");
 
         // set border panel
         String title = String.format("+%,d", increment);
