@@ -35,23 +35,42 @@ public class PanelConf extends JPanel{
             
             System.out.println("Auto Accel");
 
-            for (int i = 0; i < panelsConfIncrementer.length; i++) {
-                if (panelsConfIncrementer[i].incrementSpeed()) {
-                    break;
-                }
-            }
-
-            // randon number betwen 0 and 20
+            // random number betwen 0 and 20
             int rand = (int) (Math.random() * 20);
             int delay = 10 + rand;
             System.out.println("wait " + delay + " seconds");
-
+            
             try {
                 Thread.sleep(delay * 1000);
             } catch (InterruptedException e) {
             }
+
+            boolean incremented = false;
+            for (int i = 0; i < panelsConfIncrementer.length; i++) {
+                if (panelsConfIncrementer[i].incrementSpeed()) {
+                    incremented = true;
+                    break;
+                }
+            }
+
+            if (incremented == false) {
+                System.out.println("no more incrementers");
+            }
         }
     };
+
+    private void manualOperation() {
+        System.out.println("Manual Acceleration");
+
+        // enable all panelsConfIncrementer
+        for (PanelIncrementer panel : panelsConfIncrementer) {
+            panel.setEnabled(true);
+        }
+
+        // stop autoAccelRunnable
+        autoAccel = false;
+        autoAccelThread.interrupt();
+    }
 
     private void setEventsListener() {
         autoAccelCheckBox.addActionListener(e -> {
@@ -69,16 +88,7 @@ public class PanelConf extends JPanel{
                 autoAccelThread.start();
 
             } else {
-                System.out.println("Manual Acceleration");
-
-                // enable all panelsConfIncrementer
-                for (int i = 0; i < panelsConfIncrementer.length; i++) {
-                    panelsConfIncrementer[i].setEnabled(true);
-                }
-
-                // stop autoAccelRunnable
-                autoAccel = false;
-                autoAccelThread.interrupt();
+                manualOperation();
             }
         });
 
